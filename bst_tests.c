@@ -102,6 +102,26 @@ int unitTest5() {
     return 0;
 }
 
+//Add 100 nodes with the value of '2' and check that the sum is 200.
+int unitTest6() {
+
+    tree_t* testBST = bst_create();
+
+    int i;
+    for (i=1; i<101; i++) {
+        bst_add(testBST, 2);
+    }
+
+    int result = (bst_sum(testBST)==200);
+    bst_free(testBST);
+
+    if (result) {
+        return 1;
+    }
+
+    return 0;
+}
+
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
@@ -109,6 +129,7 @@ int (*unitTests[])(int) = {
     unitTest3,
     unitTest4,
     unitTest5,
+    unitTest6,
     NULL
 };
 

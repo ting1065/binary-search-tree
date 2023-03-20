@@ -227,28 +227,35 @@ unsigned int bst_size(tree_t *t) {
 // This should be called before the program terminates.
 void bst_free(tree_t *t) {
 
-}
-
-//a helper function to free nodes using dfs.
-void node_free_helper(treennode_t* t) {
-    
     if (t == NULL) {
         return;
     }
 
-    if (t->leftChild == NULL && t->right == NULL) {
-        free(t);
+    node_free_helper(t->source);
+    free(t);
+
+}
+
+//a helper function to free nodes using dfs.
+void node_free_helper(treenode_t* n) {
+    
+    if (n == NULL) {
         return;
     }
 
-    if (t->leftChild != NULL) {
-        node_free_helper(t->leftChild);
+    if (n->leftChild == NULL && n->right == NULL) {
+        free(n);
+        return;
     }
 
-    if (t->rightChild != NULL) {
-        node_free_helper(t->rightChild);
+    if (n->leftChild != NULL) {
+        node_free_helper(n->leftChild);
     }
 
-    free(t);
+    if (n->rightChild != NULL) {
+        node_free_helper(n->rightChild);
+    }
+
+    free(n);
 
 }

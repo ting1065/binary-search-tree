@@ -215,6 +215,36 @@ int unitTest9() {
 
 }
 
+//Add 100 nodes with the value of 2 and 1 with a different value and make sure that value is properly located on the tree.
+int unitTest10() {
+
+    tree_t* testBST = bst_create();
+    
+    int i;
+    for (i=1; i<51; i++) {
+        bst_add(testBST, 2);
+        bst_add(testBST, 1);
+    }
+
+    int result1 = (bst_size(testBST)==100);
+    int result2 = (testBST->source->data==2);
+    int result3 = (testBST->source->leftChild->data==1);
+    int result4 = (testBST->source->leftChild->leftChild==NULL);
+    int result5 = (testBST->source->leftChild->rightChild->data==1);
+    int result6 = (testBST->source->rightChild->data==2);
+    int result7 = (testBST->source->rightChild->leftChild==NULL);
+    int result8 = (testBST->source->rightChild->rightChild->data==2);
+    int result9 = (bst_sum(testBST)==150);
+    bst_free(testBST);
+
+    if (result1 && result2 && result3 && result4 &&
+        result5 && result6 && result7 && result8 && result9) {
+        return 1;
+    }
+    return 0;   
+
+}
+
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
@@ -226,6 +256,7 @@ int (*unitTests[])(int) = {
     unitTest7,
     unitTest8,
     unitTest9,
+    unitTest10,
     NULL
 };
 

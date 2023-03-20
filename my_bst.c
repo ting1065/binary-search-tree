@@ -75,15 +75,36 @@ int bst_add(tree_t *t, int item) {
 
     if (bs_empty(t)) {
         t->source = newNode;
-        return 1;
+    } else {
+        add_helper(newNode, t->source);
     }
 
-
-
-
+    t->size++;
     return 1;
 }
 
+void add_helper(treenode_t* newNode, treenode_t* oldNode) {
+
+    if (newNode->data >= oldNode->data &&
+        (oldNode->rightChild == NULL || oldNode->rightChild->data >= newNode->data)) {
+        newNode->rightChild = oldNode->rightChild;       
+        oldNode->rightChild = newNode;
+        return;
+    }
+    else if (newNode->data < oldNode->data &&
+             (oldNode->leftChild == NULL || oldNode->leftChild->data < newNode->data)) {
+        newNode->leftChild = oldNode->leftChild;
+        oldNode->leftChild = newNode;
+        return;
+    }
+
+    if (newNode->data >= oldNode->data) {
+        add_helper(newNode, oldNode->rightChild);
+    } else {
+        add_helper(newNode, oldNode->leftChild);
+    }
+
+}
 
 // Prints the tree in ascending order if order = 0, otherwise prints in descending order.
 // For NULL tree (i.e., when t == NULL) -- print "(NULL)".

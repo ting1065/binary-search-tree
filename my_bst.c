@@ -16,8 +16,17 @@
 // The BST should be initialized with data on the heap.
 // The BST fields should also be initialized to default values(i.e. size=0).
 tree_t *bst_create() {
- 
-    return NULL;
+
+    tree_t* newTree = malloc(tree_t*)malloc(sizeof(tree_t));
+
+    if (newTree == NULL) {
+        return NULL;
+    }
+    
+    newTree->size = 0;
+    newTree->source = NULL;
+
+    return newTree;
 }
 
 // BST Empty

@@ -92,7 +92,7 @@ int unitTest5() {
         bst_add(testBST, i);
     } 
 
-    int result = (testBST->size == 100);
+    int result = (bst_size(testBST) == 100);
     bst_free(testBST);
 
     if (result) {
@@ -174,7 +174,7 @@ int unitTest8() {
     int result4 = (bst_find(testBST, 3)==1);
     int result5 = (bst_find(testBST, 7)==1);
     int result6 = (bst_find(testBST, 10)==0);
-    int result7 = (testBST->size == 9);
+    int result7 = (bst_size(testBST) == 9);
     int result8 = (testBST->source->leftChild->rightChild==NULL);
     int result9 = (testBST->source->rightChild->leftChild==NULL);
     bst_free(testBST);
@@ -187,6 +187,34 @@ int unitTest8() {
     return 0;  
 }
 
+//Test all NULLs, empty trees.
+int unitTest9() {
+
+    tree_t* nullTree = NULL;
+    int result1 = (bst_add(nullTree, 8) == -1);
+    printf("two NULL expected:\n");
+    bst_print(nullTree, 0);
+    bst_print(nullTree, 1);    
+    int result2 = (bst_sum(nullTree)==-1);
+    
+    tree_t* emptyTree = bst_create();
+    int result3 = (bst_empty(emptyTree)==1);
+    printf("two NULL expected:\n");
+    bst_print(emptyTree, 0);
+    bst_print(emptyTree, 1);
+    int result4 = (bst_sum(emptyTree)==0);
+    int result5 = (bst_find(emptyTree, 1)==0);
+    int result6 = (bst_size(emptyTree)==0);
+    bst_free(emptyTree);
+
+    if (result1 && result2 && result3 &&
+        result4 && result5 && result6) {
+        return 1;
+    }
+    return 0;
+
+}
+
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
@@ -197,6 +225,7 @@ int (*unitTests[])(int) = {
     unitTest6,
     unitTest7,
     unitTest8,
+    unitTest9,
     NULL
 };
 

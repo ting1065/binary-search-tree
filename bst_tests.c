@@ -123,7 +123,32 @@ int unitTest6() {
     return 0;
 }
 
-//
+//add nodes that create a highly unbalanced tree (basically a linked list) and make sure the sum is correct, print works, tree is the correct shape
+int unitTest7() {
+
+    tree_t* testBST = bst_create();
+
+    int i;
+    for (i=10; i>=0; i-=2) {
+        bst_add(testBST, i);
+    }
+    
+    printf("expected ascending:\n");
+    bst_print(testBST, 0);
+    printf("expected descending:\n");
+    bst_print(testBST, 1);
+
+    int result1 = (bst_sum(testBST)==30);
+    int result2 = (testBST->source->rightChild==NULL);
+    bst_free(testBST);
+
+    if (result1 && result2) {
+        return 1;
+    }
+
+    return 0;
+}
+
 
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
@@ -133,6 +158,7 @@ int (*unitTests[])(int) = {
     unitTest4,
     unitTest5,
     unitTest6,
+    unitTest7,
     NULL
 };
 

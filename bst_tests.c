@@ -112,15 +112,18 @@ int unitTest6() {
         bst_add(testBST, 2);
     }
 
-    int result = (bst_sum(testBST)==200);
+    int result1 = (bst_sum(testBST)==200);
+    int result2 = (testBST->source->leftChild==NULL);
     bst_free(testBST);
 
-    if (result) {
+    if (result1 && result2) {
         return 1;
     }
 
     return 0;
 }
+
+//
 
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {

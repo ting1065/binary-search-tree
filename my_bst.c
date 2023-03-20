@@ -83,6 +83,8 @@ int bst_add(tree_t *t, int item) {
     return 1;
 }
 
+//a helper function that adds a new node(the first parameter) to 
+//a tree that has the second parameter as its root node. 
 void add_helper(treenode_t* newNode, treenode_t* oldNode) {
 
     if (newNode->data >= oldNode->data &&
@@ -132,6 +134,8 @@ void bst_print(tree_t *t, int order) {
     }
 }
 
+
+//a helper function to append all the data into an array in ascending order using dfs.
 void append_ascending_helper(treenode_t* rootNode,
                              int* dataAscendingArray,
                              int* startIndex) {
@@ -140,10 +144,10 @@ void append_ascending_helper(treenode_t* rootNode,
         return;
     }
 
-    append_ascending_helper(rootNode->leftChild);
+    append_ascending_helper(rootNode->leftChild, dataAscendingArray, startIndex);
     dataAscendingArray[*startIndex] = rootNode->data;
     *startIndex++;
-    append_ascending_helper(rootNode->rightChild);
+    append_ascending_helper(rootNode->rightChild, dataAscendingArray, startIndex);
     
 }
 
@@ -152,7 +156,25 @@ void append_ascending_helper(treenode_t* rootNode,
 // It should run in O(n) time.
 int bst_sum(tree_t *t) {
 
-    return -1;
+    if (t == NULL) {
+        return -1;
+    }
+
+    if (t->source == NULL) {
+        return 0;
+    }
+
+    int dataAscendingArray[t->size];
+    int startIndex = 0;
+    append_ascending_helper(t->source, dataAscendingArray, &startIndex);
+
+    int i;
+    int sum = 0;
+    for (i = 0; i < t->size; i++) {
+        sum += dataAscendingArray[i];
+    }
+      
+    return sum;
 }
 
 

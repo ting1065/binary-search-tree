@@ -17,7 +17,7 @@
 // The BST fields should also be initialized to default values(i.e. size=0).
 tree_t *bst_create() {
 
-    tree_t* newTree = malloc(tree_t*)malloc(sizeof(tree_t));
+    tree_t* newTree = malloc(tree_t*)(sizeof(tree_t));
 
     if (newTree == NULL) {
         return NULL;
@@ -34,6 +34,8 @@ tree_t *bst_create() {
 // Returns 1 if true (The BST is completely empty)
 // Returns 0 if false (the BST has at least one element)
 int bst_empty(tree_t *t) {
+
+    if ()
 
     return -1;
 }

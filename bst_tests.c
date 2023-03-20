@@ -82,12 +82,33 @@ int unitTest4() {
     return 0;   
 }
 
+//Add 100 nodes and then check that the size is 100.
+int unitTest5() {
+    
+    tree_t* testBST = bst_create();
+
+    int i;
+    for (i=50; i<150; i++) {
+        bst_add(testBST, i);
+    } 
+
+    int result = (testBST->size == 100);
+    bst_free(testBST);
+
+    if (result) {
+        return 1;
+    }
+
+    return 0;
+}
+
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
     unitTest2,
     unitTest3,
     unitTest4,
+    unitTest5,
     NULL
 };
 

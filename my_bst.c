@@ -36,7 +36,7 @@ tree_t *bst_create() {
 int bst_empty(tree_t *t) {
 
     if (t == NULL) {
-        return -1;
+        exit(1);
     }
 
     if (t->size > 0) {
@@ -44,7 +44,7 @@ int bst_empty(tree_t *t) {
     } else if (t->size == 0) {
         return 1;
     } else {
-        return -1;
+        exit(1);
     }
 
 }
@@ -60,6 +60,22 @@ int bst_empty(tree_t *t) {
 // Your implementation should should run in O(log(n)) time.
 //  - A recursive implementation is suggested.
 int bst_add(tree_t *t, int item) {
+    
+    if (t == NULL) {
+        return -1;
+    }
+
+    treenode_t* newNode = (treenode_t*)malloc(sizeof(treenode_t));
+    if (newNode == NULL) {
+        return -1;
+    }
+    newNode->data = item;
+    newNode->leftChild = NULL;
+    newNode->rightChild = NULL;
+
+    if (t->size)
+
+
 
     return 1;
 }

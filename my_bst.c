@@ -35,11 +35,15 @@ tree_t *bst_create() {
 // Returns 0 if false (the BST has at least one element)
 int bst_empty(tree_t *t) {
 
-    if ()
+    if (t->size > 0) {
+        return 0;
+    } else if (t->size == 0) {
+        return 1;
+    } else {
+        return -1;
+    }
 
-    return -1;
 }
-
 
 // Adds a new node containing item to the BST
 // The item is added in the correct position in the BST.

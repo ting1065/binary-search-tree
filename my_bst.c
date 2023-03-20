@@ -184,6 +184,26 @@ int bst_sum(tree_t *t) {
 // It should run in O(log(n)) time.
 int bst_find(tree_t *t, int value) {
 
+    if (t == NULL) {
+        exit(1);
+    }
+
+    
+}
+
+//helper function for seaching node by node using binary search.
+int bst_find_helper(tree_node_t* start, int target) {
+
+    if (start == NULL) {
+        return 0;
+    } else if (start->data == target){
+        return 1
+    } else if (start->data > target) {
+        return bst_find_helper(start->leftChild);
+    } else {
+        return bst_find_helper(start->rightChild);
+    }
+    
 }
 
 // Returns the size of the BST

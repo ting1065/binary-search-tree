@@ -29,6 +29,7 @@ tree_t *bst_create() {
     return newTree;
 }
 
+
 // BST Empty
 // Check if the BST is empty
 // Returns 1 if true (The BST is completely empty)
@@ -45,6 +46,32 @@ int bst_empty(tree_t *t) {
         return 1;
     } else {
         return -1;
+    }
+
+}
+
+
+//a helper function that adds a new node(the first parameter) to 
+//a tree that has the second parameter as its root node. 
+void add_helper(treenode_t* newNode, treenode_t* oldNode) {
+
+    if (newNode->data >= oldNode->data &&
+        (oldNode->rightChild == NULL || oldNode->rightChild->data >= newNode->data)) {
+        newNode->rightChild = oldNode->rightChild;       
+        oldNode->rightChild = newNode;
+        return;
+    }
+    else if (newNode->data < oldNode->data &&
+             (oldNode->leftChild == NULL || oldNode->leftChild->data < newNode->data)) {
+        newNode->leftChild = oldNode->leftChild;
+        oldNode->leftChild = newNode;
+        return;
+    }
+
+    if (newNode->data >= oldNode->data) {
+        add_helper(newNode, oldNode->rightChild);
+    } else {
+        add_helper(newNode, oldNode->leftChild);
     }
 
 }
@@ -83,29 +110,21 @@ int bst_add(tree_t *t, int item) {
     return 1;
 }
 
-//a helper function that adds a new node(the first parameter) to 
-//a tree that has the second parameter as its root node. 
-void add_helper(treenode_t* newNode, treenode_t* oldNode) {
 
-    if (newNode->data >= oldNode->data &&
-        (oldNode->rightChild == NULL || oldNode->rightChild->data >= newNode->data)) {
-        newNode->rightChild = oldNode->rightChild;       
-        oldNode->rightChild = newNode;
-        return;
-    }
-    else if (newNode->data < oldNode->data &&
-             (oldNode->leftChild == NULL || oldNode->leftChild->data < newNode->data)) {
-        newNode->leftChild = oldNode->leftChild;
-        oldNode->leftChild = newNode;
+//a helper function to append all the data into an array in ascending order using dfs.
+void append_ascending_helper(treenode_t* rootNode,
+                             int* dataAscendingArray,
+                             int* startIndex) {
+
+    if (rootNode == NULL) {
         return;
     }
 
-    if (newNode->data >= oldNode->data) {
-        add_helper(newNode, oldNode->rightChild);
-    } else {
-        add_helper(newNode, oldNode->leftChild);
-    }
-
+    append_ascending_helper(rootNode->leftChild, dataAscendingArray, startIndex);
+    dataAscendingArray[*startIndex] = rootNode->data;
+    *startIndex++;
+    append_ascending_helper(rootNode->rightChild, dataAscendingArray, startIndex);
+    
 }
 
 // Prints the tree in ascending order if order = 0, otherwise prints in descending order.
@@ -135,22 +154,6 @@ void bst_print(tree_t *t, int order) {
 }
 
 
-//a helper function to append all the data into an array in ascending order using dfs.
-void append_ascending_helper(treenode_t* rootNode,
-                             int* dataAscendingArray,
-                             int* startIndex) {
-
-    if (rootNode == NULL) {
-        return;
-    }
-
-    append_ascending_helper(rootNode->leftChild, dataAscendingArray, startIndex);
-    dataAscendingArray[*startIndex] = rootNode->data;
-    *startIndex++;
-    append_ascending_helper(rootNode->rightChild, dataAscendingArray, startIndex);
-    
-}
-
 // Returns the sum of all the nodes in the bst.
 // exits the program for a NULL tree. 
 // It should run in O(n) time.
@@ -178,20 +181,6 @@ int bst_sum(tree_t *t) {
 }
 
 
-
-// Returns 1 if value is found in the tree, 0 otherwise. 
-// For NULL tree it exists the program. 
-// It should run in O(log(n)) time.
-int bst_find(tree_t *t, int value) {
-
-    if (t == NULL) {
-        exit(1);
-    }
-
-    return bst_find_helper(t->source, value);
-    
-}
-
 //helper function for seaching node by node using binary search.
 int bst_find_helper(treenode_t* start, int target) {
 
@@ -207,6 +196,20 @@ int bst_find_helper(treenode_t* start, int target) {
     
 }
 
+// Returns 1 if value is found in the tree, 0 otherwise. 
+// For NULL tree it exists the program. 
+// It should run in O(log(n)) time.
+int bst_find(tree_t *t, int value) {
+
+    if (t == NULL) {
+        exit(1);
+    }
+
+    return bst_find_helper(t->source, value);
+    
+}
+
+
 // Returns the size of the BST
 // A BST that is NULL exits the program.
 // (i.e. A NULL BST cannot return the size)
@@ -221,20 +224,6 @@ unsigned int bst_size(tree_t *t) {
     }
 }
 
-
-// Free BST
-// Removes a BST and ALL of its elements from memory.
-// This should be called before the program terminates.
-void bst_free(tree_t *t) {
-
-    if (t == NULL) {
-        return;
-    }
-
-    node_free_helper(t->source);
-    free(t);
-
-}
 
 //a helper function to free nodes using dfs.
 void node_free_helper(treenode_t* n) {
@@ -257,5 +246,18 @@ void node_free_helper(treenode_t* n) {
     }
 
     free(n);
+}
+
+// Free BST
+// Removes a BST and ALL of its elements from memory.
+// This should be called before the program terminates.
+void bst_free(tree_t *t) {
+
+    if (t == NULL) {
+        return;
+    }
+
+    node_free_helper(t->source);
+    free(t);
 
 }

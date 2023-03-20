@@ -56,13 +56,13 @@ int bst_empty(tree_t *t) {
 void add_helper(treenode_t* newNode, treenode_t* oldNode) {
 
     if (newNode->data >= oldNode->data &&
-        (oldNode->rightChild == NULL || oldNode->rightChild->data >= newNode->data)) {
+        oldNode->rightChild == NULL) {
         newNode->rightChild = oldNode->rightChild;       
         oldNode->rightChild = newNode;
         return;
     }
     else if (newNode->data < oldNode->data &&
-             (oldNode->leftChild == NULL || oldNode->leftChild->data < newNode->data)) {
+             oldNode->leftChild == NULL) {
         newNode->leftChild = oldNode->leftChild;
         oldNode->leftChild = newNode;
         return;

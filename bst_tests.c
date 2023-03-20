@@ -53,12 +53,41 @@ int unitTest3(){
     return 0;
 }
 
+//Fill a Binary Search Tree with values 1-100 and searching for nodes.
+int unitTest4() {
+
+    tree_t* testBST = bst_create();
+
+    int i;
+    for (i=1; i<101; i++) {
+        bst_add(testBST, i);
+    }
+
+    int result1 = bst_find(testBST, -5);
+    int result2 = bst_find(testBST, 1);
+    int result3 = bst_find(testBST, 25);
+    int result4 = bst_find(testBST, 75);
+    int result5 = bst_find(testBST, 100);
+    int result6 = bst_find(testBST, 105);
+    bst_free(testBST);
+
+    if (result1 == 0 &&
+        result2 == 1 &&
+        result3 == 1 &&
+        result4 == 1 &&
+        result5 == 1 &&
+        result6 == 0) {
+        return 1;
+    }
+    return 0;   
+}
 
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
     unitTest2,
     unitTest3,
+    unitTest4,
     NULL
 };
 

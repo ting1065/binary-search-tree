@@ -134,6 +134,7 @@ void bst_print(tree_t *t, int order) {
 
     if (t == NULL || t->source == NULL) {
         printf("(NULL)");
+        return;
     } 
     
     int dataAscendingArray[t->size];

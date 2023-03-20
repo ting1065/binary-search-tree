@@ -188,6 +188,7 @@ int bst_find(tree_t *t, int value) {
         exit(1);
     }
 
+    return bst_find_helper(t->source, value);
     
 }
 

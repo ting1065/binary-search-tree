@@ -36,7 +36,7 @@ tree_t *bst_create() {
 int bst_empty(tree_t *t) {
 
     if (t == NULL) {
-        exit(1);
+        return -1;
     }
 
     if (t->size > 0) {
@@ -44,7 +44,7 @@ int bst_empty(tree_t *t) {
     } else if (t->size == 0) {
         return 1;
     } else {
-        exit(1);
+        return -1;
     }
 
 }
@@ -73,7 +73,11 @@ int bst_add(tree_t *t, int item) {
     newNode->leftChild = NULL;
     newNode->rightChild = NULL;
 
-    if (t->size)
+    if (bs_empty(t)) {
+        t->source = newNode;
+        return 1;
+    }
+
 
 
 

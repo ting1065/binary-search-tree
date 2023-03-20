@@ -35,6 +35,10 @@ tree_t *bst_create() {
 // Returns 0 if false (the BST has at least one element)
 int bst_empty(tree_t *t) {
 
+    if (t == NULL) {
+        return -1;
+    }
+
     if (t->size > 0) {
         return 0;
     } else if (t->size == 0) {

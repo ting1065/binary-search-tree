@@ -133,9 +133,9 @@ int unitTest7() {
         bst_add(testBST, i);
     }
     
-    printf("expected ascending:\n");
+    printf("ascending expected:\n");
     bst_print(testBST, 0);
-    printf("expected descending:\n");
+    printf("descending expected:\n");
     bst_print(testBST, 1);
 
     int result1 = (bst_sum(testBST)==30);
@@ -149,6 +149,43 @@ int unitTest7() {
     return 0;
 }
 
+//Add nodes that create a "V"-shaped tree
+//and make sure all functions still work. 
+int unitTest8() {
+
+    tree_t* testBST = bst_create();
+
+    int i;
+    for (i=5; i<10; i++) {
+        bst_add(testBST, i);
+    }
+    for (i=4; i>0; i--) {
+        bst_add(testBST, i);
+    }
+
+    printf("asending expected:\n");
+    bst_print(testBST, 0);
+    printf("descending expected:\n");
+    bst_print(testBST, 1);
+
+    int result1 = (bst_empty(testBST)==0);
+    int result2 = (bst_sum(testBST)==45);
+    int result3 = (bst_find(testBST, 0)==0);
+    int result4 = (bst_find(testBST, 3)==1);
+    int result5 = (bst_find(testBST, 7)==1);
+    int result6 = (bst_find(testBST, 10)==0);
+    int result7 = (testBST->size == 9);
+    int result8 = (testBST->source->leftChild->rightChild==NULL);
+    int result9 = (testBST->source->rightChild->leftChild==NULL);
+    bst_free(testBST);
+
+    if (result1 && result2 && result3 && result4 && result5 &&
+        result6 && result7 && result8 && result9) {
+        return 1;
+    }
+
+    return 0;  
+}
 
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
@@ -159,6 +196,7 @@ int (*unitTests[])(int) = {
     unitTest5,
     unitTest6,
     unitTest7,
+    unitTest8,
     NULL
 };
 

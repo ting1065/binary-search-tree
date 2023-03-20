@@ -113,6 +113,21 @@ void bst_print(tree_t *t, int order) {
  
 }
 
+void append_ascending_helper(treenode_t* rootNode,
+                             int* dataAscendingArray,
+                             int startIndex) {
+
+    if (rootNode == NULL) {
+        return;
+    }
+
+    append_ascending_helper(rootNode->leftChild);
+    dataAscendingArray[startIndex] = rootNode->data;
+    startIndex++;
+    append_ascending_helper(rootNode->rightChild);
+    
+}
+
 // Returns the sum of all the nodes in the bst.
 // exits the program for a NULL tree. 
 // It should run in O(n) time.

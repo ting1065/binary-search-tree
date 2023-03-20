@@ -17,7 +17,7 @@
 // The BST fields should also be initialized to default values(i.e. size=0).
 tree_t *bst_create() {
 
-    tree_t* newTree = malloc(tree_t*)(sizeof(tree_t));
+    tree_t* newTree = (tree_t*)malloc(sizeof(tree_t));
 
     if (newTree == NULL) {
         return NULL;
@@ -100,7 +100,7 @@ int bst_add(tree_t *t, int item) {
     newNode->leftChild = NULL;
     newNode->rightChild = NULL;
 
-    if (bs_empty(t)) {
+    if (bst_empty(t)) {
         t->source = newNode;
     } else {
         add_helper(newNode, t->source);

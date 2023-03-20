@@ -212,6 +212,13 @@ int bst_find_helper(tree_node_t* start, int target) {
 // (i.e. A NULL BST cannot return the size)
 unsigned int bst_size(tree_t *t) {
 
+    if (t == NULL) {
+        exit(1);
+    } else if (t->size >= 0) {
+        return t->size;
+    } else {
+        exit(1);
+    }
 }
 
 

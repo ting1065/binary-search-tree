@@ -110,20 +110,39 @@ void add_helper(treenode_t* newNode, treenode_t* oldNode) {
 // For NULL tree (i.e., when t == NULL) -- print "(NULL)".
 // It should run in O(n) time.
 void bst_print(tree_t *t, int order) {
- 
+
+    if (t == NULL || t->source == NULL) {
+        printf("(NULL)");
+    } 
+    
+    int dataAscendingArray[t->size];
+    int startIndex = 0;
+
+    append_ascending_helper(t->source, dataAscendingArray, &startIndex);
+    
+    int i;
+    if (order == 0) {
+        for (i = 0; i < t->size; i++) {
+            printf("%d\n", dataAscendingArray[i]);
+        }
+    } else {
+        for (i = t->size - 1; i >= 0; i--) {
+            printf("%d\n", dataAscendingArray[i]);
+        }
+    }
 }
 
 void append_ascending_helper(treenode_t* rootNode,
                              int* dataAscendingArray,
-                             int startIndex) {
+                             int* startIndex) {
 
     if (rootNode == NULL) {
         return;
     }
 
     append_ascending_helper(rootNode->leftChild);
-    dataAscendingArray[startIndex] = rootNode->data;
-    startIndex++;
+    dataAscendingArray[*startIndex] = rootNode->data;
+    *startIndex++;
     append_ascending_helper(rootNode->rightChild);
     
 }

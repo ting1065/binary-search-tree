@@ -122,7 +122,7 @@ void append_ascending_helper(treenode_t* rootNode,
 
     append_ascending_helper(rootNode->leftChild, dataAscendingArray, startIndex);
     dataAscendingArray[*startIndex] = rootNode->data;
-    *startIndex++;
+    *startIndex += 1;
     append_ascending_helper(rootNode->rightChild, dataAscendingArray, startIndex);
     
 }

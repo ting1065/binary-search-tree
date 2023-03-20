@@ -245,6 +245,28 @@ int unitTest10() {
 
 }
 
+//test if one node can be inserted to the right place.
+int unitTest11() {
+
+    tree_t* testBST = bst_create();
+    bst_add(testBST, 8);
+    bst_add(testBST, 3);
+    bst_add(testBST, 7);
+    bst_add(testBST, 4);
+    bst_add(testBST, 5);
+
+    int result1 = (bst_size(testBST)==5);
+    int result2 = (bst_sum(testBST)==27);
+    int result3 = (testBST->source->leftChild->rightChild->leftChild->data==4);
+    int result4 = (testBST->source->leftChild->rightChild->leftChild->rightChild->data==5);
+    bst_free(testBST);
+
+    if (result1 && result2 && result3 && result4) {
+        return 1;
+    }
+    return 0;   
+}
+
 // TODO: Add more tests here at your discretion
 int (*unitTests[])(int) = {
     unitTest1,
@@ -257,6 +279,7 @@ int (*unitTests[])(int) = {
     unitTest8,
     unitTest9,
     unitTest10,
+    unitTest11,
     NULL
 };
 

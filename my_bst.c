@@ -133,7 +133,7 @@ void append_ascending_helper(treenode_t* rootNode,
 void bst_print(tree_t *t, int order) {
 
     if (t == NULL || t->source == NULL) {
-        printf("(NULL)");
+        printf("(NULL)\n");
         return;
     } 
     

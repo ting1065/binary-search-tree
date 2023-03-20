@@ -193,16 +193,16 @@ int bst_find(tree_t *t, int value) {
 }
 
 //helper function for seaching node by node using binary search.
-int bst_find_helper(tree_node_t* start, int target) {
+int bst_find_helper(treenode_t* start, int target) {
 
     if (start == NULL) {
         return 0;
     } else if (start->data == target){
-        return 1
+        return 1;
     } else if (start->data > target) {
-        return bst_find_helper(start->leftChild);
+        return bst_find_helper(start->leftChild, target);
     } else {
-        return bst_find_helper(start->rightChild);
+        return bst_find_helper(start->rightChild, target);
     }
     
 }
@@ -243,7 +243,7 @@ void node_free_helper(treenode_t* n) {
         return;
     }
 
-    if (n->leftChild == NULL && n->right == NULL) {
+    if (n->leftChild == NULL && n->rightChild == NULL) {
         free(n);
         return;
     }

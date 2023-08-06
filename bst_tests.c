@@ -1,20 +1,8 @@
-// You must submit this test file with your code implementation. 
-// include all tests that you used to test your binary search tree implementation
-// Compile this assignment with: gcc -Wall -g bst_tests.c -o tests
-// This is a great assignment to practice debugging.
-// Run with: gdb ./tests --tui
-// Then type 'start'
-// Then type 'next' or 'n' and enter
-// See the GDB debugging video for more information
+// test suite for the binary search tree implementation
 
 #include <stdio.h>  
 #include <stdlib.h> 
-
 #include "my_bst.h"
-
-// Write more tests here to test your implementation. 
-// We will use our own test suite (i.e. replacing this file)
-// in order to test your implementation from my_bst.
 
 // Testing allocation
 int unitTest1(){
@@ -123,7 +111,8 @@ int unitTest6() {
     return 0;
 }
 
-//add nodes that create a highly unbalanced tree (basically a linked list) and make sure the sum is correct, print works, tree is the correct shape
+//add nodes that create a highly unbalanced tree (basically a linked list)
+//and make sure the sum is correct, print works, tree is the correct shape
 int unitTest7() {
 
     tree_t* testBST = bst_create();
@@ -215,7 +204,8 @@ int unitTest9() {
 
 }
 
-//Add 100 nodes with the value of 2 and 1 with a different value and make sure that value is properly located on the tree.
+//Add 100 nodes with the value of 2 and 1 with a different value
+//and make sure that value is properly located on the tree.
 int unitTest10() {
 
     tree_t* testBST = bst_create();
@@ -267,7 +257,7 @@ int unitTest11() {
     return 0;   
 }
 
-// TODO: Add more tests here at your discretion
+
 int (*unitTests[])(int) = {
     unitTest1,
     unitTest2,
@@ -283,13 +273,9 @@ int (*unitTests[])(int) = {
     NULL
 };
 
-// ====================================================
-// ================== Program Entry ===================
-// ====================================================
 int main(){
 	
 	unsigned int testsPassed = 0;
-    // List of Unit Tests to test your data structure
     int counter =0;
     while(unitTests[counter] != NULL){
 		printf("========unitTest %d========\n",counter);
